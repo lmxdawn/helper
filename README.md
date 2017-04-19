@@ -1,8 +1,7 @@
-# thinkphp5 常用的一些扩展类库
+# 自己常用的一些扩展类库 基于 think-helper
 
-> 更新完善中
-
-> 以下类库都在`\\think\\helper`命名空间下
+##安装
+> composer require lmxdawn/helper
 
 ## Str
 > 字符串操作
