@@ -105,10 +105,10 @@ class Tool
             ),
         );
         if (!empty($formArray)){
-            $formArray = array_merge($Temp,$formArray);
+            $Temp = array_merge($Temp,$formArray);
         }
         //dump($formArray);exit;
-        foreach ($formArray as $v) {
+        foreach ($Temp as $v) {
             if (empty($v['val'])){
                 return $num;
             }elseif (0 != $c = (abs($num) / (int)$v['val'])) {
