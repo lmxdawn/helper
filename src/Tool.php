@@ -78,4 +78,47 @@ class Tool
         }
     }
 
+
+    /**
+     * 格式化为多少万或者亿
+     * @param int $num 需要格式化的数
+     * @param array $formArray 格式
+     * @return int|string
+     */
+    public static function formNum($num = 0,$formArray = []){
+
+        $Temp = array(
+            array(
+                'val'   =>  100000000,
+                'suffix' => '亿',
+                'maxDecimal'    =>  '1',
+            ),
+            array(
+                'val'   =>  10000,
+                'suffix' => '万',
+                'maxDecimal'    =>  '0'
+            ),
+            array(
+                'val'   =>  1,
+                'suffix' => '',
+                'maxDecimal'    =>  '0'
+            ),
+        );
+        if (!empty($formArray)){
+            $formArray = array_merge($Temp,$formArray);
+        }
+        //dump($formArray);exit;
+        foreach ($formArray as $v) {
+            if (empty($v['val'])){
+                return $num;
+            }elseif (0 != $c = (abs($num) / (int)$v['val'])) {
+                $suffix = !empty($v['suffix']) ? $v['suffix'] : '';//后缀
+                $maxDecimal = !empty($v['maxDecimal']) ? $v['maxDecimal'] : 0;//最大保留小数
+                return sprintf('%.'.$maxDecimal.'f',$c).$suffix;
+            }
+
+        }
+
+    }
+
 }
