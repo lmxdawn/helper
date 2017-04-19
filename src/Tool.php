@@ -86,7 +86,6 @@ class Tool
      * @return int|string
      */
     public static function formNum($num = 0,$formArray = []){
-
         $Temp = array(
             array(
                 'val'   =>  100000000,
@@ -111,10 +110,13 @@ class Tool
         foreach ($Temp as $v) {
             if (empty($v['val'])){
                 return $num;
-            }elseif (0 != $c = (abs($num) / (int)$v['val'])) {
-                $suffix = !empty($v['suffix']) ? $v['suffix'] : '';//后缀
-                $maxDecimal = !empty($v['maxDecimal']) ? $v['maxDecimal'] : 0;//最大保留小数
-                return sprintf('%.'.$maxDecimal.'f',$c).$suffix;
+            }else{
+                $n = abs($num) / (int)$v['val'];
+                if (0 != $c = floor($n)) {
+                    $suffix = !empty($v['suffix']) ? $v['suffix'] : '';//后缀
+                    $maxDecimal = !empty($v['maxDecimal']) ? $v['maxDecimal'] : 0;//最大保留小数
+                    return sprintf('%.'.$maxDecimal.'f',$n).$suffix;
+                }
             }
 
         }
