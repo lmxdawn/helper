@@ -123,4 +123,32 @@ class Tool
 
     }
 
+
+    /**
+     * 获取当前域名
+     * @return string
+     */
+    public static function baseUrl(){
+        $http =  (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https://' : 'http://';
+        $host = (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
+        $port = $_SERVER["SERVER_PORT"] == 80 ? '' : ':'.$_SERVER["SERVER_PORT"];
+        return $http.$host.$port;
+    }
+
+    /**
+     * 获取当前的完整URL
+     * @return string
+     */
+    public static function selfUrl() {
+        $php_self = $_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME'];
+        $path_info = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '';
+        $relate_url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $php_self.(isset($_SERVER['QUERY_STRING']) ? '?'.$_SERVER['QUERY_STRING'] : $path_info);
+        return self::baseUrl().$relate_url;
+    }
+
+
+
+
+
+
 }
